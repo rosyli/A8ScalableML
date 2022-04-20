@@ -1,0 +1,40 @@
+##--train the model and generate the prediction file for round 2 test dataset locally--##
+
+- download the required files below:
+  "train_set_87989.tsv" & "validation_set_6195.tsv"   #train dataset
+  "k-sep_normalized.tsv"   #protein feature vector file 
+  "ecfp4.tsv"   #compound fingerprint file 
+  "input.csv"   #round 2 template file
+
+- run the script "model_k-sep_round2-proteins_100tree.py" 
+
+(it will save the model as pkl file "0.3std_filtered_round2-proteins_k-sep_no-thr_rf_100tree_0.33ft.pkl",
+ which is already uploaded in the current directory src_rf_syn18636987)
+
+
+
+
+##--generate the prediction file for round 2 test dataset locally via the model pkl file--#
+
+- download the required files below:
+  "input.csv"   #round 2 template file
+  "k-sep_normalized.tsv"   #protein feature vector file 
+  "0.3std_filtered_round2-proteins_k-sep_no-thr_rf_100tree_0.33ft.pkl"   #model file in the pkl format
+
+- run the script "prediction.py" to generate the prediction file "prediction.csv".
+
+
+
+
+##--generate the prediction file for round 2 kinase bioactivity dataset via docker container "docker.synapse.org/syn18636383/crossbar_chemogenomic-modelling_rf:9686327--##
+
+- pull the docker image with the command below:
+
+ (sudo) docker pull docker.synapse.org/syn18636383/crossbar_chemogenomic-modelling_rf:9686327
+
+
+- run the docker container from your working directory (including an input file named "input.csv" in the form of the challenge template file format) with the command below, which will generate the prediction file into your working directory as "prediction.csv":
+
+  (sudo) docker run -it --rm -v $PWD:/input -v $PWD:/output docker.synapse.org/syn18636383/crossbar_chemogenomic-modelling_rf:9686327
+
+(you can download the file "input.csv" in the directory src_rf_syn18636987 into your working directory and use it as the input file, which is the round 2 template file)
